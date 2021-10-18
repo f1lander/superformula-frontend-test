@@ -8,7 +8,7 @@ export const Header: React.FC<HeaderProps> = (
   props: HeaderProps
 ): JSX.Element => {
   return (
-    <Container>
+    <Container direction="column">
       <Heading>{props.heading}</Heading>
       {props.rating && <h3>stars</h3>}
       <SubHeading>{props.subHeading}</SubHeading>

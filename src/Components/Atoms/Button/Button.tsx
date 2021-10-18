@@ -21,6 +21,7 @@ export const Button = styled.button<any>`
   font-size: 12px;
   line-height: 16px;
   text-transform: uppercase;
+  background: white;
   ${({ variant }) =>
     variant
       ? css`

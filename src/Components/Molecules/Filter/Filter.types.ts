@@ -1,5 +1,5 @@
 export interface OptionsProps {
-    value: boolean;
+    value: string;
     label: string;
 }
 

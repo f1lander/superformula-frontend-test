@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 enum directions {
   column = "column",
@@ -14,7 +14,19 @@ export const Container = styled.div<IContainer>`
   padding: 64px;
 `;
 
-export const SelectValuesContainer = styled.div`
+const fadeOut = css`
+  opacity: 0;
+  transition: visibility 0s linear 300ms, opacity 300ms;
+  visibility: hidden;
+`;
+
+const fadeIn = css`
+  opacity: 1;
+  transition: visibility 0s linear 300ms, opacity 300ms;
+  visibility: visible;
+`;
+
+export const SelectValuesContainer = styled.div<{ isOpen: boolean }>`
   width: 193px;
   flex-direction: column;
   position: absolute;
@@ -27,6 +39,7 @@ export const SelectValuesContainer = styled.div`
   top: 45px;
   color: #606060;
   font-size: 16px;
+  ${({ isOpen }) => (!isOpen ? fadeOut : fadeIn)};
 `;
 
 export const SelectContainer = styled.div`

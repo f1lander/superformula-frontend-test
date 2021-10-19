@@ -1,24 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { CheckBoxSelectProps } from "./CheckBoxSelect.types";
 import {
   SelectContainer,
   SelectValuesContainer,
   ValueContainer,
-} from "../../Atoms/Container/Container";
+} from "../Container/Container";
 
-// import CaretDown from '../../../icons/CaretDown.svg'
-// import {ReactComponent as CaretUp} from '../../../assets/CaretDown.svg'
+import { useOnClickOutside } from "../../../hooks/useOnClickOutside";
 
 export const CheckBoxSelect: React.FC<CheckBoxSelectProps> = (
   props: CheckBoxSelectProps
 ): JSX.Element => {
+  const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleClickOutside = () => {
+    setIsOpen(false);
+  };
+
+  useOnClickOutside(ref, handleClickOutside);
   return (
-    <>
+    <div ref={ref}>
       <SelectContainer>
         <label>{props.label}</label>
         <span onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? (
+          {!isOpen ? (
             <svg
               width="8"
               height="5"
@@ -47,21 +53,19 @@ export const CheckBoxSelect: React.FC<CheckBoxSelectProps> = (
           )}
         </span>{" "}
       </SelectContainer>
-      {isOpen && (
-        <SelectValuesContainer>
-          {props.values?.map((option, index) => (
-            <ValueContainer>
-              <input
-                type="checkbox"
-                id={`checkbox-${index}`}
-                name="fav_language"
-                value="HTML"
-              />
-                <label htmlFor={`checkbox-${index}`}>{option.label}</label>
-            </ValueContainer>
-          ))}
-        </SelectValuesContainer>
-      )}
-    </>
+
+      <SelectValuesContainer isOpen={isOpen}>
+        {props.values?.map((option, index) => (
+          <ValueContainer>
+            <input
+              type="checkbox"
+              id={`checkbox-${index}`}
+              value={option.value}
+            />
+              <label htmlFor={`checkbox-${index}`}>{option.label}</label>
+          </ValueContainer>
+        ))}
+      </SelectValuesContainer>
+    </div>
   );
 };

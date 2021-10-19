@@ -1,7 +1,9 @@
-import { OptionsProps } from "../../Molecules/Filter/Filter.types";
-
+export interface OptionsProps {
+  value: string;
+  label: string;
+}
 export interface CheckBoxSelectProps {
-    values: Array<OptionsProps>;
-    label: string;
-    onChange?(): void;
+  options: Array<OptionsProps>;
+  label: string;
+  onChange?(): void;
 }

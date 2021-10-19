@@ -1,7 +1,15 @@
 import styled, { css } from "styled-components";
 
+enum Variants {
+  filled = 'filled',
+}
+
+interface IButton {
+  variant?: keyof typeof Variants;
+}
+
 const variants: any = {
-  filled: `
+  filled: css`
     width: 304px;
     height: 48px;
     font-size: 14px;
@@ -9,10 +17,10 @@ const variants: any = {
     background: #002b56;
     color: white;
     border-radius: 2px;
-    `,
+  `,
 };
 
-export const Button = styled.button<any>`
+export const Button = styled.button<IButton>`
   width: 151px;
   height: 38px;
   border: 1px solid #002b56;
@@ -22,10 +30,5 @@ export const Button = styled.button<any>`
   line-height: 16px;
   text-transform: uppercase;
   background: white;
-  ${({ variant }) =>
-    variant
-      ? css`
-          ${variants[variant]}
-        `
-      : null}
+  ${({ variant }) => (variant ? variants[variant] : null)}
 `;

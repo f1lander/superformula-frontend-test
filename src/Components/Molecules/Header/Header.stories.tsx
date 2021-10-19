@@ -5,7 +5,7 @@ import { Header } from "./Header";
 import { HeaderProps } from "./Header.types";
 
 export default {
-  title: "Header/Primary",
+  title: "Molecules/Header",
   component: Header,
 } as ComponentMeta<typeof Header>;
 

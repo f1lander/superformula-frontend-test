@@ -5,7 +5,7 @@ import { CheckBoxSelect } from "./CheckBoxSelect";
 import { CheckBoxSelectProps } from "./CheckBoxSelect.types";
 
 export default {
-  title: "CheckBoxSelect/Primary",
+  title: "Atoms/CheckBoxSelect",
   component: CheckBoxSelect,
 } as ComponentMeta<typeof CheckBoxSelect>;
 
@@ -13,21 +13,21 @@ const Template: ComponentStory<typeof CheckBoxSelect> = (args) => <CheckBoxSelec
 
 const checkBoxSelectProps: CheckBoxSelectProps = {
  label: 'Categories',
- values: [
+ options: [
      {
-         value: false,
+         value: 'all',
          label: 'All'
      },
      {
-        value: false,
+        value: 'italian',
         label: 'Italian'
     },
     {
-        value: false,
+        value: 'italian',
         label: 'Seafood'
     },
     {
-        value: false,
+        value: 'Steakhouses',
         label: 'Steakhouses',
     }
  ]

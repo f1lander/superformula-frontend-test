@@ -55,7 +55,7 @@ export const CheckBoxSelect: React.FC<CheckBoxSelectProps> = (
       </SelectContainer>
 
       <SelectValuesContainer isOpen={isOpen}>
-        {props.values?.map((option, index) => (
+        {props.options?.map((option, index) => (
           <ValueContainer>
             <input
               type="checkbox"

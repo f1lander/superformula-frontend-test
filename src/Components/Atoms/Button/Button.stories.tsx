@@ -5,7 +5,7 @@ import { Button } from "./Button";
 import { ButtonProps } from "./Button.types";
 
 export default {
-  title: "Button/Primary",
+  title: "Atoms/Button",
   component: Button,
 } as ComponentMeta<typeof Button>;
 

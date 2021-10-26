@@ -9,7 +9,6 @@ export const RatingStars: React.FC<RatingStarsProps> = (
   const isDecimal = Number.isNaN(stars) ? false: stars - Math.floor(stars) !== 0;
   const filledStars = Number.isNaN(Math.floor(stars)) ? [] : Array(Math.floor(stars)).fill(0);
   const emptyStars = Number.isNaN(Math.floor(stars)) ? Array(5).fill(0) : Array(Math.floor(5 - Math.floor(stars) - (isDecimal ? 1 : 0))).fill(0);
-  debugger;
   return (
     <div>
       {filledStars

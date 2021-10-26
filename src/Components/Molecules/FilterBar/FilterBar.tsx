@@ -5,8 +5,7 @@ import {
   ValueContainer,
   Item,
 } from "../../Atoms/Container/Container";
-import { Button } from "../../Atoms/Button/Button";
-import { CheckBoxSelect } from "../../Atoms/CheckBoxSelect/CheckBoxSelect";
+import { Button, CheckBoxSelect } from "../../Atoms";
 import { FilterBarProps } from "./FilterBar.types";
 
 export const FilterBar: React.FC<FilterBarProps> = (

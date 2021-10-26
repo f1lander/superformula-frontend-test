@@ -1,13 +1,24 @@
 import React from "react";
 
-import { Container, Button, ImageCard } from "../../Atoms";
+import { RestaurantCardContainer, Button, ImageCard, Heading } from "../../Atoms";
+import { Item } from "../../Atoms/Container/Container";
+import { RatingStars } from "../../Atoms/RatingStars/RatingStars";
+import { StatusIndicator } from "../../Atoms/StatusIndicator/StatusIndicator";
 import { RestaurantCardProps } from "./RestaurantCard.types";
 
-export const RestaurantCard: React.FC<Partial<RestaurantCardProps>> = (props: Partial<RestaurantCardProps>): JSX.Element => {
+export const RestaurantCard: React.FC<Partial<RestaurantCardProps>> = (
+  props: Partial<RestaurantCardProps>
+): JSX.Element => {
   return (
-    <Container direction="column">
-      <ImageCard />
+    <RestaurantCardContainer direction="column">
+      <ImageCard src={props.imageSrc} />
+      <Heading fontSize="20px">{props.heading}</Heading>
+      <RatingStars stars={props.rating} />
+      <Item>
+        <Item variant="status-indicator">{`${props.category} ${props.priceCategory}`}</Item>
+        <StatusIndicator status={props.isOpen} />
+      </Item>
       <Button variant="filled">Learn More</Button>
-    </Container>
+    </RestaurantCardContainer>
   );
 };

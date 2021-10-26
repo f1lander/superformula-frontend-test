@@ -21,5 +21,5 @@ const headerProps: RestaurantCardProps = {
   priceCategory: "$$$",
   rating: 5,
 };
-export const header = Template.bind({});
-header.args = headerProps;
+export const Principal = Template.bind({});
+Principal.args = headerProps;

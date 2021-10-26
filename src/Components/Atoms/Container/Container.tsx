@@ -5,10 +5,24 @@ enum directions {
   row = "row",
 }
 
+const itemVariants: any = {
+  "status-indicator": css`
+    font-family: HelveticaNeue;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: right;
+    letter-spacing: 0.5px;
+    color: #757575;
+    text-transform: uppercase;
+  `,
+};
+
 interface IContainer {
   direction: keyof typeof directions;
   flex: number;
   justifyContent: string;
+  gap: `${number}px`;
+  variant: string;
 }
 
 const fadeOut = css`
@@ -26,10 +40,11 @@ const fadeIn = css`
 export const Item = styled.div<Partial<IContainer>>`
   display: flex;
   flex: ${({ flex }) => flex ?? 1};
-  gap: 32px;
+  gap: ${({ gap }) => gap ?? "32px"};
   justify-content: ${({ justifyContent }) => justifyContent ?? "flex-start"};
   align-items: center;
   flex-wrap: wrap;
+  ${({ variant }) => (variant ? itemVariants[variant] : null)}
 `;
 
 export const Container = styled.div<Partial<IContainer>>`
@@ -40,21 +55,31 @@ export const Container = styled.div<Partial<IContainer>>`
   padding-bottom: 36px;
 `;
 
+export const RestaurantCardContainer = styled.div<Partial<IContainer>>`
+  display: flex;
+  flex-direction: ${({ direction }) => directions[direction ?? directions.row]};
+  padding-left: 64px;
+  padding-top: 36px;
+  padding-bottom: 36px;
+  gap: 10px;
+  width: 304px;
+`;
+
 export const FilterBarContainer = styled.div<Partial<IContainer>>`
   display: flex;
   flex-direction: ${({ direction }) => directions[direction ?? directions.row]};
   justify-content: flex-start;
   align-items: center;
   min-height: 80px;
-  border-top: 1px solid #E6E6E6;
-  border-bottom: 1px solid #E6E6E6;
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
   color: #002b56;
   box-sizing: border-box;
   padding-left: 64px;
   padding-right: 64px;
   flex-wrap: wrap;
   #filter-label {
-    color: #606060
+    color: #606060;
   }
 `;
 

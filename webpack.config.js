@@ -19,9 +19,9 @@ module.exports = {
   devServer: {
     hot: true,
     proxy: {
-      'https://api.yelp.com/v3/graphql': {
+      '/v3/graphql': {
          target: 'http://localhost:8080/',
-         secure: false,
+         router: () => 'https://api.yelp.com',
          changeOrigin: true
       }
    }

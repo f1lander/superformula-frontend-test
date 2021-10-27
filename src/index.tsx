@@ -6,13 +6,25 @@ import {
   ApolloClient,
   InMemoryCache,
   createHttpLink,
+  from,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { onError } from "@apollo/client/link/error";
 
 const httpLink = createHttpLink({
-  uri: "https://api.yelp.com/v3/graphql",
-  credentials: 'same-origin'
+  uri: "/v3/graphql",
 });
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors)
+      graphQLErrors.forEach(({ message, locations, path }) =>
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+        ),
+      );
+  
+    if (networkError) console.log(`[Network error]: ${networkError}`);
+  });
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
@@ -23,12 +35,13 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       authorization: token ? `Bearer ${token}` : "",
+      'Accept-Language': 'en-US',
     },
   };
 });
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: from([authLink,errorLink,httpLink]),
   cache: new InMemoryCache(),
 });
 

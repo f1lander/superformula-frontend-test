@@ -2,14 +2,29 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 const path = require("path");
 const webpack = require("webpack");
+const dotenv = require('dotenv');
 
 const isDevelopment = process.env.NODE_ENV !== "production";
-
+// call dotenv and it will return an Object with a parsed key 
+const env = dotenv.config().parsed;
+  
+// reduce it to a nice object, the same as before
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 module.exports = {
   mode: isDevelopment ? "development" : "production",
   entry: "./src/index.tsx",
   devServer: {
     hot: true,
+    proxy: {
+      'https://api.yelp.com/v3/graphql': {
+         target: 'http://localhost:8080/',
+         secure: false,
+         changeOrigin: true
+      }
+   }
   },
   target: "web",
   output: {
@@ -22,6 +37,7 @@ module.exports = {
     }),
     isDevelopment && new webpack.HotModuleReplacementPlugin(),
     isDevelopment && new ReactRefreshWebpackPlugin(),
+    new webpack.DefinePlugin(envKeys)
   ],
   resolve: {
     modules: [__dirname, "src", "node_modules"],

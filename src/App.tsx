@@ -1,8 +1,8 @@
 import React from "react";
-import { RestaurantsSection } from "./Components/Templates/Restaurants";
+import { RestaurantsSection } from "./Pages/Restaurants";
 
-const App = () => {
-    return <RestaurantsSection />
-}
+const App = () => {  
+  return <RestaurantsSection />;
+};
 
 export default App;

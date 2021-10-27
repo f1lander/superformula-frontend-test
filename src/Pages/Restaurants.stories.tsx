@@ -1,11 +1,11 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { FilterBar } from "../Molecules/FilterBar/FilterBar";
-import { FilterBarProps } from "../Molecules/FilterBar/FilterBar.types";
+import { FilterBar } from "../Components/Molecules/FilterBar/FilterBar";
+import { FilterBarProps } from "../Components/Molecules/FilterBar/FilterBar.types";
 
-import { Header } from "../Molecules/Header/Header";
-import { HeaderProps } from "../Molecules/Header/Header.types";
+import { Header } from "../Components/Molecules/Header/Header";
+import { HeaderProps } from "../Components/Molecules/Header/Header.types";
 
 export default {
   title: "Templates/Restaurants",

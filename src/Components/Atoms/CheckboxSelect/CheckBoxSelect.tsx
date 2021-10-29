@@ -4,7 +4,7 @@ import {
   SelectContainer,
   SelectValuesContainer,
   ValueContainer,
-  Item,
+  CheckBoxSelectContainer,
 } from "../Container/Container";
 
 import { useOnClickOutside } from "../../../hooks/useOnClickOutside";
@@ -45,7 +45,7 @@ export const CheckBoxSelect: React.FC<CheckBoxSelectProps> = (
 
   useOnClickOutside(ref, handleClickOutside);
   return (
-    <Item ref={ref}>
+    <CheckBoxSelectContainer ref={ref}>
       <SelectContainer>
         <label>{props.label}</label>
         <span onClick={() => setIsOpen(!isOpen)}>
@@ -77,21 +77,21 @@ export const CheckBoxSelect: React.FC<CheckBoxSelectProps> = (
             </svg>
           )}
         </span>{" "}
-        <SelectValuesContainer isOpen={isOpen}>
-          {props.options?.map((option, index) => (
-            <ValueContainer>
-              <input
-                onChange={(e) => handleOnCheck(e)}
-                type="checkbox"
-                id={`checkbox-${index}`}
-                value={option.value}
-                checked={selected[option.value]}
-              />
-                <label htmlFor={`checkbox-${index}`}>{option.label}</label>
-            </ValueContainer>
-          ))}
-        </SelectValuesContainer>
       </SelectContainer>
-    </Item>
+      <SelectValuesContainer isOpen={isOpen}>
+        {props.options?.map((option, index) => (
+          <ValueContainer>
+            <input
+              onChange={(e) => handleOnCheck(e)}
+              type="checkbox"
+              id={`checkbox-${index}`}
+              value={option.value}
+              checked={selected[option.value]}
+            />
+              <label htmlFor={`checkbox-${index}`}>{option.label}</label>
+          </ValueContainer>
+        ))}
+      </SelectValuesContainer>
+    </CheckBoxSelectContainer>
   );
 };

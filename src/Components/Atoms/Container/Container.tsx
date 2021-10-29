@@ -82,10 +82,10 @@ export const FilterBarContainer = styled.div<Partial<IContainer>>`
   }
 `;
 
-export const SelectValuesContainer = styled.div<{ isOpen: boolean }>`  
+export const SelectValuesContainer = styled.div<{ isOpen: boolean }>`
   width: 193px;
   flex-direction: column;
-  position: relative;
+  position: absolute;
   padding: 10px;
   align-items: center;
   justify-content: flex-start;
@@ -97,6 +97,12 @@ export const SelectValuesContainer = styled.div<{ isOpen: boolean }>`
   font-size: 16px;
   background-color: white;
   ${({ isOpen }) => (!isOpen ? fadeOut : fadeIn)};
+`;
+
+export const CheckBoxSelectContainer = styled.div`
+  position: relative;
+  width: 200px;
+  height: 35px
 `;
 
 export const SelectContainer = styled.div`

@@ -1,4 +1,4 @@
-import { CheckBoxSelectProps } from "../../Atoms/CheckBoxSelect/CheckBoxSelect.types";
+import { CheckBoxSelectProps } from "../../Atoms/Select/Select.types";
 
 type OptionsType = CheckBoxSelectProps["options"];
 export interface FilterBarProps {

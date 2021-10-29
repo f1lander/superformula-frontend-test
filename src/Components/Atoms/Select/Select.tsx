@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { CheckBoxSelectProps } from "./CheckBoxSelect.types";
+import { CheckBoxSelectProps } from "./Select.types";
 import {
   SelectContainer,
   SelectValuesContainer,
@@ -9,7 +9,7 @@ import {
 
 import { useOnClickOutside } from "../../../hooks/useOnClickOutside";
 
-export const CheckBoxSelect: React.FC<CheckBoxSelectProps> = (
+export const Select: React.FC<CheckBoxSelectProps> = (
   props: CheckBoxSelectProps
 ): JSX.Element => {
   const ref = useRef(null);
@@ -22,7 +22,6 @@ export const CheckBoxSelect: React.FC<CheckBoxSelectProps> = (
   };
 
   const handleOnCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
-    debugger;
     setSelected({
       ...selected,
       ...{ [event.target.value]: event.target.checked },
@@ -35,7 +34,6 @@ export const CheckBoxSelect: React.FC<CheckBoxSelectProps> = (
       ? props.options.map((item) => item.value).filter((item) => item !== "All")
       : keys.filter((item: any) => selected[item]);
 
-    debugger;
     props.onChange({
       [props.filterType]: keysSelected,
     });

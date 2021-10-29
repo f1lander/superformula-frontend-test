@@ -5,7 +5,7 @@ import {
   ValueContainer,
   Item,
 } from "../../Atoms/Container/Container";
-import { Button, CheckBoxSelect } from "../../Atoms";
+import { Button, Select } from "../../Atoms";
 import { FilterBarProps } from "./FilterBar.types";
 
 export const FilterBar: React.FC<FilterBarProps> = (
@@ -24,8 +24,8 @@ export const FilterBar: React.FC<FilterBarProps> = (
           />
           <label htmlFor="checkbox-open-now">Open Now</label>
         </ValueContainer>
-        <CheckBoxSelect filterType="price" onChange={props.onFilter} label="Price" options={props.priceOptions} />
-        <CheckBoxSelect filterType="categories" onChange={props.onFilter} label="Categories" options={props.categoriesOptions} />
+        <Select filterType="price" onChange={props.onFilter} label="Price" options={props.priceOptions} />
+        <Select filterType="categories" onChange={props.onFilter} label="Categories" options={props.categoriesOptions} />
       </Item>
       <Item flex={1} justifyContent="flex-end">
         <Button onClick={() => props.onClearAll()}>Clear All</Button>

@@ -7,7 +7,7 @@ import { Heading } from "./Heading/Heading";
 import { SubHeading } from "./SubHeading/SubHeading";
 import { ImageCard } from "./ImageCard/ImageCard";
 import { Button } from "./Button/Button";
-import { CheckBoxSelect } from "./CheckBoxSelect/CheckBoxSelect";
+import { Select } from "./Select/Select";
 
 export {
   Container,
@@ -16,6 +16,6 @@ export {
   ImageCard,
   Button,
   RestaurantCardContainer,
-  CheckBoxSelect,
+  Select,
   Item,
 };

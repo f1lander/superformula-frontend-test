@@ -1,15 +1,15 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { CheckBoxSelect } from "./CheckBoxSelect";
-import { CheckBoxSelectProps } from "./CheckBoxSelect.types";
+import { Select } from "./Select";
+import { CheckBoxSelectProps } from "./Select.types";
 
 export default {
-  title: "Atoms/CheckBoxSelect",
-  component: CheckBoxSelect,
-} as ComponentMeta<typeof CheckBoxSelect>;
+  title: "Atoms/Select",
+  component: Select,
+} as ComponentMeta<typeof Select>;
 
-const Template: ComponentStory<typeof CheckBoxSelect> = (args) => <CheckBoxSelect {...args} />;
+const Template: ComponentStory<typeof Select> = (args) => <Select {...args} />;
 
 const checkBoxSelectProps: CheckBoxSelectProps = {
  label: 'Categories',

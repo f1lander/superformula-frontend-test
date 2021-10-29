@@ -57,8 +57,7 @@ export const Container = styled.div<Partial<IContainer>>`
 
 export const RestaurantCardContainer = styled.div<Partial<IContainer>>`
   display: flex;
-  flex-direction: ${({ direction }) => directions[direction ?? directions.row]};
-  padding-left: 64px;
+  flex-direction: ${({ direction }) => directions[direction ?? directions.row]};  
   padding-top: 36px;
   padding-bottom: 36px;
   gap: 10px;

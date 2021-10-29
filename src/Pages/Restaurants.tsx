@@ -8,7 +8,7 @@ import { CardsSection } from "../Components/Organisms/CardsSection/CardsSection"
 
 const QUERY_BUSINESS = gql`
   query GetBusiness($offset: Int!) {
-    search(location: "Las Vegas", limit: 8, offset: $offset) {
+    search(location: "Las Vegas", limit: 10, offset: $offset) {
       total
       business {
         name
@@ -33,11 +33,7 @@ const QUERY_BUSINESS = gql`
 export const RestaurantsSection: React.FC<any> = (props: any): JSX.Element => {
   const [categories, setCategories] = useState();
   const [offset, setOffset] = useState(0);
-  const {
-    loading,
-    error,
-    data,
-  } = useQuery(QUERY_BUSINESS, {
+  const { loading, error, data } = useQuery(QUERY_BUSINESS, {
     variables: { offset },
   });
 
@@ -66,7 +62,15 @@ export const RestaurantsSection: React.FC<any> = (props: any): JSX.Element => {
         subHeading="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       />
       <FilterBar />
-      <CardsSection title="All Restaurants" cards={data?.search?.business}/>
+      <CardsSection
+        title="All Restaurants"
+        cards={data?.search?.business.map((item: any) => ({
+          ...item,
+          imageSrc: item.photos[0],
+          category: item?.categories[0]?.title,
+          isOpen: item?.hours[0]?.is_open_now
+        }))}
+      />
     </>
   );
 };

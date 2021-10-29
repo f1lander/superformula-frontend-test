@@ -91,9 +91,6 @@ export const RestaurantsSection: React.FC<any> = (props: any): JSX.Element => {
   if (error) {
     return <p>Error :(</p>;
   }
-
-  console.log(data, categories, offset);
-
   return (
     <>
       <Header

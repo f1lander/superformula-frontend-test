@@ -1,8 +1,8 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { FilterBar } from "../Components/Molecules/FilterBar/FilterBar";
-import { FilterBarProps } from "../Components/Molecules/FilterBar/FilterBar.types";
+import { FilterBar } from "../Components/Organisms/FilterBar/FilterBar";
+import { FilterBarProps } from "../Components/Organisms/FilterBar/FilterBar.types";
 
 import { Header } from "../Components/Molecules/Header/Header";
 import { HeaderProps } from "../Components/Molecules/Header/Header.types";

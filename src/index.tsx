@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 import ReactDOM from "react-dom";
 import App from "./App";
 import {
@@ -10,6 +11,12 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
+
+const token = process.env.YELP_API_KEY;
+
+axios.defaults.headers.common = {
+  'Authorization': `Bearer ${token}`
+};
 
 const httpLink = createHttpLink({
   uri: "/v3/graphql",
@@ -28,8 +35,6 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-
-  const token = process.env.YELP_API_KEY;
   // return the headers to the context so httpLink can read them
   return {
     headers: {

@@ -23,7 +23,12 @@ module.exports = {
          target: 'http://localhost:8080/',
          router: () => 'https://api.yelp.com',
          changeOrigin: true
-      }
+      },
+      '/v3': {
+        target: 'http://localhost:8080/',
+        router: () => 'https://api.yelp.com',
+        changeOrigin: true
+     }
    }
   },
   target: "web",

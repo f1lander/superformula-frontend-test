@@ -12,10 +12,10 @@ export const RestaurantCard: React.FC<Partial<RestaurantCardProps>> = (
   return (
     <RestaurantCardContainer direction="column">
       <ImageCard src={props.imageSrc} />
-      <Heading fontSize="20px">{props.heading}</Heading>
+      <Heading fontSize="20px">{props.name}</Heading>
       <RatingStars stars={props.rating} />
       <Item>
-        <Item variant="status-indicator">{`${props.category} ${props.priceCategory}`}</Item>
+        <Item variant="status-indicator">{`${props.category} ${props.price}`}</Item>
         <StatusIndicator status={props.isOpen} />
       </Item>
       <Button variant="filled">Learn More</Button>

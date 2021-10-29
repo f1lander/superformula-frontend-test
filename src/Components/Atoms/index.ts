@@ -1,4 +1,4 @@
-import { Container, RestaurantCardContainer } from "./Container/Container";
+import { Container, RestaurantCardContainer, Item } from "./Container/Container";
 import { Heading } from "./Heading/Heading";
 import { SubHeading } from "./SubHeading/SubHeading";
 import { ImageCard } from "./ImageCard/ImageCard";
@@ -13,4 +13,5 @@ export {
   Button,
   RestaurantCardContainer,
   CheckBoxSelect,
+  Item,
 };

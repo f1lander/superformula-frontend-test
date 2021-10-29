@@ -89,7 +89,6 @@ export const RestaurantsSection: React.FC<any> = (props: any): JSX.Element => {
   };
 
   if (error) {
-    console.log(error);
     return <p>Error :(</p>;
   }
 

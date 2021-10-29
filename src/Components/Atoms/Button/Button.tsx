@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components";
 
 enum Variants {
-  filled = 'filled',
+  filled = "filled",
+  large = "large",
 }
 
 interface IButton {
@@ -17,6 +18,10 @@ const variants: any = {
     background: #002b56;
     color: white;
     border-radius: 2px;
+  `,
+  large: css`
+    width: 416px;
+    margin-top:45px; 
   `,
 };
 

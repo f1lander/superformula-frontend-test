@@ -1,9 +1,10 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { CheckBoxSelectProps } from "./CheckBoxSelect.types";
 import {
   SelectContainer,
   SelectValuesContainer,
   ValueContainer,
+  Item,
 } from "../Container/Container";
 
 import { useOnClickOutside } from "../../../hooks/useOnClickOutside";
@@ -13,14 +14,38 @@ export const CheckBoxSelect: React.FC<CheckBoxSelectProps> = (
 ): JSX.Element => {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
-
+  const [selected, setSelected] = useState<{ [x: string]: boolean }>({
+    All: true,
+  });
   const handleClickOutside = () => {
     setIsOpen(false);
   };
 
+  const handleOnCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
+    debugger;
+    setSelected({
+      ...selected,
+      ...{ [event.target.value]: event.target.checked },
+    });
+  };
+
+  useEffect(() => {
+    const keys: Array<string> = Object.keys(selected);
+    const keysSelected = selected["All"]
+      ? props.options.map((item) => item.value).filter((item) => item !== "All")
+      : keys.filter((item: any) => selected[item]);
+
+    debugger;
+    props.onChange({
+      [props.filterType]: keysSelected,
+    });
+  }, [selected]);
+
+  console.log(selected);
+
   useOnClickOutside(ref, handleClickOutside);
   return (
-    <div ref={ref}>
+    <Item ref={ref}>
       <SelectContainer>
         <label>{props.label}</label>
         <span onClick={() => setIsOpen(!isOpen)}>
@@ -52,20 +77,21 @@ export const CheckBoxSelect: React.FC<CheckBoxSelectProps> = (
             </svg>
           )}
         </span>{" "}
+        <SelectValuesContainer isOpen={isOpen}>
+          {props.options?.map((option, index) => (
+            <ValueContainer>
+              <input
+                onChange={(e) => handleOnCheck(e)}
+                type="checkbox"
+                id={`checkbox-${index}`}
+                value={option.value}
+                checked={selected[option.value]}
+              />
+                <label htmlFor={`checkbox-${index}`}>{option.label}</label>
+            </ValueContainer>
+          ))}
+        </SelectValuesContainer>
       </SelectContainer>
-
-      <SelectValuesContainer isOpen={isOpen}>
-        {props.options?.map((option, index) => (
-          <ValueContainer>
-            <input
-              type="checkbox"
-              id={`checkbox-${index}`}
-              value={option.value}
-            />
-              <label htmlFor={`checkbox-${index}`}>{option.label}</label>
-          </ValueContainer>
-        ))}
-      </SelectValuesContainer>
-    </div>
+    </Item>
   );
 };

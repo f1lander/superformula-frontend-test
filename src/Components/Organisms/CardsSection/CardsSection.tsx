@@ -15,7 +15,9 @@ export const CardsSection: React.FC<CardsSectionProps> = (
           <RestaurantCard {...item} />
         ))}
       </Item>
+      <Item justifyContent="center">
       {props.children}
+      </Item>
     </Container>
   );
 };

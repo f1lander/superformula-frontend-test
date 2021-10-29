@@ -5,6 +5,7 @@ import { Header, FilterBar } from "../Components/Molecules";
 
 import { gql, useQuery } from "@apollo/client";
 import { CardsSection } from "../Components/Organisms/CardsSection/CardsSection";
+import { Button } from "../Components/Atoms";
 
 const QUERY_BUSINESS = gql`
   query GetBusiness($offset: Int!) {
@@ -29,48 +30,104 @@ const QUERY_BUSINESS = gql`
     }
   }
 `;
-
+interface IFilters {
+  isOpenNow: boolean;
+  price: Array<string> | undefined;
+  categories: Array<string> | undefined;
+}
 export const RestaurantsSection: React.FC<any> = (props: any): JSX.Element => {
   const [categories, setCategories] = useState();
   const [offset, setOffset] = useState(0);
-  const { loading, error, data } = useQuery(QUERY_BUSINESS, {
+  const [business, setBusiness] = useState<any>([]);
+  const [priceOptions, setPriceOptions] = useState([
+    { label: "All", value: "All" },
+    { label: "$", value: "$" },
+    { label: "$$", value: "$$" },
+    { label: "$$$", value: "$$$" },
+    { label: "$$$$", value: "$$$$" },
+  ]);
+  const [categoriesOptions, setCategoriesOptions] = useState([
+    { label: "All", value: "All" },
+  ]);
+  const [filters, setFilters] = useState<IFilters>({
+    isOpenNow: false,
+    price: undefined,
+    categories: undefined,
+  });
+  const { loading, error, data, fetchMore } = useQuery(QUERY_BUSINESS, {
     variables: { offset },
+    nextFetchPolicy: "cache-first",
   });
 
   useEffect(() => {
     const getCategories = async () => {
       const { data: result } = await axios.get("/v3/categories");
       setCategories(result);
-
-      console.log(result);
     };
     getCategories();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  useEffect(() => {
+    fetchMore({ variables: { offset } });
+  }, [offset]);
+
+  const handleOnClearAll = () => {
+    setFilters({
+      isOpenNow: false,
+      price: undefined,
+      categories: undefined,
+    });
+  };
+
+  const handleOnLoadMore = () => {
+    setBusiness([...business, ...data.search.business]);
+    setOffset(offset + 10);
+  };
+
+  const handleOnFilter = (filter: any) => {    
+    setFilters({ ...filters, ...filter });
+  };
 
   if (error) {
     console.log(error);
     return <p>Error :(</p>;
   }
 
-  console.log(data, categories);
+  console.log(data, categories, offset);
+
   return (
     <>
       <Header
         heading="Restaurants"
         subHeading="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
       />
-      <FilterBar />
-      <CardsSection
-        title="All Restaurants"
-        cards={data?.search?.business.map((item: any) => ({
-          ...item,
-          imageSrc: item.photos[0],
-          category: item?.categories[0]?.title,
-          isOpen: item?.hours[0]?.is_open_now
-        }))}
+      <FilterBar
+        priceOptions={priceOptions}
+        categoriesOptions={categoriesOptions}
+        onFilter={handleOnFilter}
+        onClearAll={handleOnClearAll}
       />
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <CardsSection
+          title="All Restaurants"
+          cards={[...business, ...data?.search?.business]
+            .map((item: any) => ({
+              ...item,
+              imageSrc: item.photos[0],
+              category: item?.categories[0]?.title,
+              isOpen: item?.hours[0]?.is_open_now,
+            }))
+            .filter((item) => (filters.isOpenNow ? item.isOpen : item))
+            .filter((item) => (filters.price ? filters.price.includes(item.price) : item))
+          }
+        >
+          <Button variant="large" onClick={() => handleOnLoadMore()}>
+            Load More
+          </Button>
+        </CardsSection>
+      )}
     </>
   );
 };

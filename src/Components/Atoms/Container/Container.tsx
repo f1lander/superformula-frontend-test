@@ -57,7 +57,7 @@ export const Container = styled.div<Partial<IContainer>>`
 
 export const RestaurantCardContainer = styled.div<Partial<IContainer>>`
   display: flex;
-  flex-direction: ${({ direction }) => directions[direction ?? directions.row]};  
+  flex-direction: ${({ direction }) => directions[direction ?? directions.row]};
   padding-top: 36px;
   padding-bottom: 36px;
   gap: 10px;
@@ -82,7 +82,7 @@ export const FilterBarContainer = styled.div<Partial<IContainer>>`
   }
 `;
 
-export const SelectValuesContainer = styled.div<{ isOpen: boolean }>`
+export const SelectValuesContainer = styled.div<{ isOpen: boolean }>`  
   width: 193px;
   flex-direction: column;
   position: relative;

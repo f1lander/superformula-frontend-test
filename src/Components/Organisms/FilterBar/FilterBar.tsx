@@ -16,14 +16,19 @@ export const FilterBar: React.FC<FilterBarProps> = (
       <Item flex={2}>
         <div id="filter-label">Filter By:</div>
         <ValueContainer>
-          <input type="checkbox" id="checkbox-open-now" value={0} />
+          <input
+            onChange={(e) => props.onFilter({ isOpenNow: e.target.checked })}
+            type="checkbox"
+            id="checkbox-open-now"
+            value={0}
+          />
           <label htmlFor="checkbox-open-now">Open Now</label>
         </ValueContainer>
-        <CheckBoxSelect label="Price" options={[]} />
-        <CheckBoxSelect label="Categories" options={[]} />
+        <CheckBoxSelect filterType="price" onChange={props.onFilter} label="Price" options={props.priceOptions} />
+        <CheckBoxSelect filterType="categories" onChange={props.onFilter} label="Categories" options={props.categoriesOptions} />
       </Item>
       <Item flex={1} justifyContent="flex-end">
-        <Button>Clear All</Button>
+        <Button onClick={() => props.onClearAll()}>Clear All</Button>
       </Item>
     </FilterBarContainer>
   );

@@ -5,5 +5,6 @@ export interface OptionsProps {
 export interface CheckBoxSelectProps {
   options: Array<OptionsProps>;
   label: string;
-  onChange?(): void;
+  filterType: string;
+  onChange(filter: any): void;  
 }

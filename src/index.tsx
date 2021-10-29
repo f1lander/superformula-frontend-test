@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios';
+import axios from "axios";
 import ReactDOM from "react-dom";
 import App from "./App";
 import {
@@ -11,11 +11,12 @@ import {
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import { onError } from "@apollo/client/link/error";
+import { offsetLimitPagination } from "@apollo/client/utilities";
 
 const token = process.env.YELP_API_KEY;
 
 axios.defaults.headers.common = {
-  'Authorization': `Bearer ${token}`
+  Authorization: `Bearer ${token}`,
 };
 
 const httpLink = createHttpLink({
@@ -23,15 +24,15 @@ const httpLink = createHttpLink({
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors)
-      graphQLErrors.forEach(({ message, locations, path }) =>
-        console.log(
-          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
-        ),
-      );
-  
-    if (networkError) console.log(`[Network error]: ${networkError}`);
-  });
+  if (graphQLErrors)
+    graphQLErrors.forEach(({ message, locations, path }) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+      )
+    );
+
+  if (networkError) console.log(`[Network error]: ${networkError}`);
+});
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
@@ -40,13 +41,13 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       authorization: token ? `Bearer ${token}` : "",
-      'Accept-Language': 'en-US',
+      "Accept-Language": "en-US",
     },
   };
 });
 
 const client = new ApolloClient({
-  link: from([authLink,errorLink,httpLink]),
+  link: from([authLink, errorLink, httpLink]),
   cache: new InMemoryCache(),
 });
 
